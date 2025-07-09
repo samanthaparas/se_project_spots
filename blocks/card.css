@@ -1,18 +1,28 @@
-.card {
-  max-width: 413px;
-}
-
 .card__image {
   height: 413px;
-  width: 413px;
+  width: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 8px;
 }
 
 .card__content {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 413px;
+}
+
+.card__title {
+  font-size: 20px;
+  max-width: 353px;
+  font-weight: 500;
+  line-height: 120%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 .card__like-btn {
@@ -22,4 +32,15 @@
   border: none;
   background-color: transparent;
   opacity: 40%;
+}
+
+@media screen and (max-width: 627px) {
+  .card__image {
+    height: 288px;
+  }
+
+  .card__title {
+    font-size: 16px;
+    max-width: 250px;
+  }
 }
