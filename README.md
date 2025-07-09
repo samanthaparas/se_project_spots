@@ -22,4 +22,4 @@ This project is made so all the elements are displayed correctly on popular scre
 
 This webpage is deployed to GitHub Pages:
 
-- [Samantha's Spots Project](https://github.com/samanthaparas/se_project_spots)
+- [Samantha's Spots Project](https://samanthaparas.github.io/se_project_spots/)
