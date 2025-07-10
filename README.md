@@ -23,3 +23,5 @@ This project is made so all the elements are displayed correctly on popular scre
 This webpage is deployed to GitHub Pages:
 
 - [Samantha's Spots Project](https://samanthaparas.github.io/se_project_spots/)
+
+- [Project Video](https://drive.google.com/file/d/1-s-AYoiR_3Ecy_oDQGNwy8FtTZg1txD8/view?usp=sharing)
