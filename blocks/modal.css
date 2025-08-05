@@ -1,5 +1,6 @@
 .modal {
   visibility: hidden;
+  opacity: 0;
   background-color: #00000080;
   position: fixed;
   top: 0;
@@ -11,10 +12,12 @@
   align-items: center;
   padding: 10px;
   font-family: poppins;
+  transition: opacity 0.85s ease, visibility 0.85s ease;
 }
 
 .modal_is-opened {
   visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
