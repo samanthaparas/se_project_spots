@@ -1,4 +1,4 @@
-# Project 3: Spots
+# Spots Stage 8
 
 ### Overview
 
@@ -14,11 +14,13 @@ This project is made so all the elements are displayed correctly on popular scre
 - Structuring all code within HTML, CSS, and JS files
 - Aligning, attaching images, responsive to different screen sizes
 - Opening and closing modals smoothly
-- Users being able to enter in information in the input fields and have it reflect what was submitted
+- Users can submit information into the input fields and have it reflect what was submitted
+- Delete pictures off of the website
+- Click on each picture to view it in it's original size
 
 **Figma**
 
-- [Link to the project on Figma](https://www.figma.com/design/rGnA0eBcxYVOpA4bxmqlyu/Sprint-4-Project-Spots---March-2025?node-id=0-1&p=f&t=HV4YIKPL3NemEGel-0)
+- [Link to the project on Figma](https://www.figma.com/design/p7amENvGmugKHfrOif5p1E/Sprint-5-Project-Spots---March-2025?node-id=2-218&t=c9whzcLzS0gMrSW2-0)
 
 **Deployment**
 
