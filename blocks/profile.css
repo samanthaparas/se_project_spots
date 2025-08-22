@@ -88,6 +88,18 @@
   opacity: 70%;
 }
 
+@media screen and (min-width: 627px) and (max-width: 681px) {
+  .profile__add-btn {
+    padding: 18px 32px;
+  }
+
+  .profile__name {
+    font-size: 24px;
+    margin: 0 0 6px;
+    max-width: 288px;
+  }
+}
+
 @media screen and (max-width: 627px) {
   .profile {
     flex-direction: column;

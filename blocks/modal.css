@@ -81,6 +81,11 @@
 
 .modal__label {
   margin: 0 0 32px;
+  color: #212121;
+  opacity: 70%;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 110%;
 }
 
 .modal__input {
@@ -90,13 +95,23 @@
   width: 100%;
   padding: 16px 12px;
   border-width: 1px;
-  border-color: rgba(33, 33, 33, 0.4);
+  border-color: #212121;
+  font-weight: 500;
   border-radius: 8px;
   font-size: 20px;
+  opacity: 40%;
+  line-height: 100%;
+  cursor: pointer;
+  transition: opacity 0.35s ease-in-out;
+}
+
+.modal__input:hover {
+  opacity: 100%;
 }
 
 .modal__input::placeholder {
   color: #2121214d;
+  opacity: 1;
 }
 
 .modal__submit-btn {
