@@ -1,0 +1,44 @@
+{
+  "name": "se_project_spots",
+  "version": "0.1.0",
+  "description": "- Intro - Figma - Deployment",
+  "homepage": "https://github.com/samanthaparas/se_project_spots#readme",
+  "bugs": {
+    "url": "https://github.com/samanthaparas/se_project_spots/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samanthaparas/se_project_spots.git"
+  },
+  "license": "ISC",
+  "author": "Samantha Paras",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve --mode development",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.3",
+    "@babel/preset-env": "^7.28.3",
+    "autoprefixer": "^10.4.21",
+    "babel-loader": "^10.0.0",
+    "clean-webpack-plugin": "4.0.0",
+    "css-loader": "6.7.1",
+    "cssnano": "5.1.12",
+    "gh-pages": "^6.3.0",
+    "html-webpack-plugin": "5.5.0",
+    "mini-css-extract-plugin": "2.6.1",
+    "postcss": "^8.5.6",
+    "postcss-loader": "7.0.1",
+    "webpack": "^5.101.3",
+    "webpack-cli": "5.1.4",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "dependencies": {
+    "core-js": "3.23.5"
+  }
+}

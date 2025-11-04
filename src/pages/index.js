@@ -1,4 +1,28 @@
-import { enableValidation, settings, resetValidation } from "./validation.js";
+import "./index.css";
+import {
+  enableValidation,
+  settings,
+  resetValidation,
+  disableButton,
+} from "../scripts/validation.js";
+
+import logo from "../images/logo.svg";
+import avatar from "../images/avatar.jpg";
+import pencil from "../images/pencil.svg";
+import plus from "../images/plus.svg";
+import favicon from "../images/favicon.ico";
+
+const link =
+  document.querySelector("link[rel~='icon']") || document.createElement("link");
+
+link.rel = "icon";
+link.href = favicon;
+document.head.appendChild(link);
+
+document.querySelector(".header__logo").src = logo;
+document.querySelector(".profile__avatar").src = avatar;
+document.querySelector(".profile__edit-btn img").src = pencil;
+document.querySelector(".profile__add-btn-img").src = plus;
 
 const initialCards = [
   {
