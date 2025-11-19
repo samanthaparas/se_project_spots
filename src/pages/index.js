@@ -66,7 +66,6 @@ const api = new Api({
   },
 });
 
-// destructure the second item in the callback of the .then()
 api
   .getAppInfo()
   .then(([userData, cards]) => {
@@ -78,12 +77,10 @@ api
       const cardElement = getCardElement(item);
       cardsList.append(cardElement);
     });
-    // Handle the user's information
-    // - set the src of the avatar image
-    // - set the textContent of both the text elements
   })
   .catch(console.error);
 
+// Edit profile elements
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
 const editProfileForm = editProfileModal.querySelector(".modal__form");
@@ -95,6 +92,7 @@ const editProfileDescriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
 
+// New post elements
 const newPostBtn = document.querySelector(".profile__add-btn");
 const newPostModal = document.querySelector("#new-post-modal");
 const newPostForm = newPostModal.querySelector(".modal__form");
@@ -103,11 +101,12 @@ const newPostCloseBtn = newPostModal.querySelector(".modal__close-btn");
 const newPostCardImageInput = newPostModal.querySelector("#card-image-input");
 const newPostCaptionInput = newPostModal.querySelector("#caption-input");
 
+// Profile name and description elements
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 const profileAvatarEl = document.querySelector(".profile__avatar");
 
-// Avatar form element
+// Avatar form elements
 const avatarModalBtn = document.querySelector(".profile__avatar-btn");
 const avatarModal = document.querySelector("#avatar-modal");
 const avatarForm = avatarModal.querySelector(".modal__form");
@@ -115,6 +114,10 @@ const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
 const avatarModalCloseBtn = avatarModal.querySelector(".modal__close");
 const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 
+// Delete form elements
+const deleteModal = document.querySelector("#delete-modal");
+
+// Preview modal and close
 const previewModal = document.querySelector("#preview-modal");
 const previewModalCloseBtn = previewModal.querySelector(
   ".modal__close-btn_type_preview"
@@ -145,6 +148,7 @@ function getCardElement(data) {
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtnEl.addEventListener("click", () => {
     cardElement.remove();
+    openModal(deleteModal);
   });
 
   cardImageEl.addEventListener("click", () => {
