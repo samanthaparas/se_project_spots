@@ -12,6 +12,7 @@ import pencil from "../images/pencil.svg";
 import plus from "../images/plus.svg";
 import favicon from "../images/favicon.ico";
 import Api from "../utils/Api.js";
+import pencilLight from "../images/pencil-light.svg";
 
 const link =
   document.querySelector("link[rel~='icon']") || document.createElement("link");
@@ -24,6 +25,7 @@ document.querySelector(".header__logo").src = logo;
 document.querySelector(".profile__avatar").src = avatar;
 document.querySelector(".profile__edit-btn img").src = pencil;
 document.querySelector(".profile__add-btn-img").src = plus;
+document.querySelector(".profile__pencil-icon").src = pencilLight;
 
 // const initialCards = [
 //   {
@@ -104,6 +106,14 @@ const newPostCaptionInput = newPostModal.querySelector("#caption-input");
 const profileNameEl = document.querySelector(".profile__name");
 const profileDescriptionEl = document.querySelector(".profile__description");
 const profileAvatarEl = document.querySelector(".profile__avatar");
+
+// Avatar form element
+const avatarModalBtn = document.querySelector(".profile__avatar-btn");
+const avatarModal = document.querySelector("#avatar-modal");
+const avatarForm = avatarModal.querySelector(".modal__form");
+const avatarSubmitBtn = avatarModal.querySelector(".modal__submit-btn");
+const avatarModalCloseBtn = avatarModal.querySelector(".modal__close");
+const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 
 const previewModal = document.querySelector("#preview-modal");
 const previewModalCloseBtn = previewModal.querySelector(
@@ -195,6 +205,13 @@ newPostBtn.addEventListener("click", function () {
   openModal(newPostModal);
 });
 
+avatarModalBtn.addEventListener("click", function () {
+  resetValidation(avatarForm, settings);
+  openModal(avatarModal);
+});
+
+avatarForm.addEventListener("submit", handleAvatarSubmit);
+
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   api
@@ -226,6 +243,27 @@ function handleNewPostSubmit(evt) {
   evt.target.reset();
   disableButton(newPostFormBtn, settings);
   closeModal(newPostModal);
+}
+
+// to-do: finish avatar submission handler
+function handleAvatarSubmit(evt) {
+  evt.preventDefault();
+
+  const avatarLink = avatarInput.value;
+
+  api
+    .editAvatarInfo(avatarLink)
+    .then((data) => {
+      profileAvatarEl.src = data.avatar;
+
+      avatarForm.reset();
+      disableButton(avatarSubmitBtn, settings);
+
+      closeModal(avatarModal);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 newPostForm.addEventListener("submit", handleNewPostSubmit);
