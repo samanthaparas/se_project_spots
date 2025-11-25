@@ -13,6 +13,7 @@ import plus from "../images/plus.svg";
 import favicon from "../images/favicon.ico";
 import Api from "../utils/Api.js";
 import pencilLight from "../images/pencil-light.svg";
+import closeWhiteIcon from "../images/close-white-icon.svg";
 
 const link =
   document.querySelector("link[rel~='icon']") || document.createElement("link");
@@ -116,6 +117,18 @@ const avatarInput = avatarModal.querySelector("#profile-avatar-input");
 
 // Delete form elements
 const deleteModal = document.querySelector("#delete-modal");
+const deleteForm = deleteModal.querySelector(".modal__form");
+const deleteCancelBtn = deleteModal.querySelector(".modal__btn-cancel");
+
+const deleteModalCloseBtn = deleteModal.querySelector(".modal__close-btn");
+deleteModalCloseBtn.style.backgroundImage = `url(${closeWhiteIcon})`;
+deleteModalCloseBtn.style.backgroundColor = "transparent";
+
+if (deleteCancelBtn) {
+  deleteCancelBtn.addEventListener("click", () => {
+    closeModal(deleteModal);
+  });
+}
 
 // Preview modal and close
 const previewModal = document.querySelector("#preview-modal");
@@ -125,11 +138,35 @@ const previewModalCloseBtn = previewModal.querySelector(
 const previewImageEl = previewModal.querySelector(".modal__image");
 const previewImageCaption = previewModal.querySelector(".modal__caption");
 
+// Card elements
 const cardTemplate = document
   .querySelector("#card-template")
   .content.querySelector(".card");
 
 const cardsList = document.querySelector(".cards__list");
+
+let selectedCard;
+let selectedCardId;
+
+function handleDeleteCard(cardElement, cardData) {
+  selectedCard = cardElement;
+  selectedCardId = cardData._id;
+  openModal(deleteModal);
+}
+
+function handleDeleteSubmit(evt) {
+  evt.preventDefault();
+
+  api
+    .deleteCard(selectedCardId)
+    .then(() => {
+      selectedCard.remove();
+      selectedCard = null;
+      selectedCardId = null;
+      closeModal(deleteModal);
+    })
+    .catch(console.error);
+}
 
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -147,8 +184,7 @@ function getCardElement(data) {
 
   const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
   cardDeleteBtnEl.addEventListener("click", () => {
-    cardElement.remove();
-    openModal(deleteModal);
+    handleDeleteCard(cardElement, data);
   });
 
   cardImageEl.addEventListener("click", () => {
@@ -216,6 +252,8 @@ avatarModalBtn.addEventListener("click", function () {
 
 avatarForm.addEventListener("submit", handleAvatarSubmit);
 
+deleteForm.addEventListener("submit", handleDeleteSubmit);
+
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
   api
@@ -224,9 +262,8 @@ function handleEditProfileSubmit(evt) {
       about: editProfileDescriptionInput.value,
     })
     .then((data) => {
-      // to-do: use data argument instead of the input values
-      profileNameEl.textContent = editProfileNameInput.value;
-      profileDescriptionEl.textContent = editProfileDescriptionInput.value;
+      profileNameEl.textContent = data.name;
+      profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
     })
     .catch(console.error);
@@ -237,16 +274,23 @@ editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
 
-  const inputValues = {
+  const newCardData = {
     name: newPostCaptionInput.value,
     link: newPostCardImageInput.value,
   };
 
-  const cardElement = getCardElement(inputValues);
-  cardsList.prepend(cardElement);
-  evt.target.reset();
-  disableButton(newPostFormBtn, settings);
-  closeModal(newPostModal);
+  api
+    .addCard(newCardData)
+    .then((cardDataFromServer) => {
+      const cardElement = getCardElement(cardDataFromServer);
+      cardsList.prepend(cardElement);
+      evt.target.reset();
+      disableButton(newPostFormBtn, settings);
+      closeModal(newPostModal);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 // to-do: finish avatar submission handler

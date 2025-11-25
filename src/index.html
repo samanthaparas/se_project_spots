@@ -213,12 +213,16 @@
         <button
           aria-label="Close modal"
           type="button"
-          class="modal__close-btn"
+          class="modal__close-btn modal__close-btn_delete"
         ></button>
         <h2 class="modal__title">
           Are you sure you want to delete this image?
         </h2>
-        <form class="modal__form" novalidate id="delete-form">
+        <form
+          class="modal__form modal__form-delete"
+          novalidate
+          id="delete-form"
+        >
           <button
             aria-label="Submit modal"
             type="submit"
@@ -227,9 +231,9 @@
             Delete
           </button>
           <button
-            aria-label="Submit modal"
+            aria-label="Cancel delete"
             type="button"
-            class="modal__submit-btn"
+            class="modal__btn-cancel"
           >
             Cancel
           </button>

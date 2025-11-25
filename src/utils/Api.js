@@ -4,7 +4,6 @@ class Api {
     this._headers = headers;
   }
 
-  // to-do: create another method, called getUserInfo (different base url like below)
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
@@ -16,11 +15,6 @@ class Api {
     });
   }
 
-  getAppInfo() {
-    // to-do: call getUserInfo in this arrary
-    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
-  }
-
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
@@ -30,6 +24,10 @@ class Api {
       }
       return Promise.reject(`Error: ${res.status}`);
     });
+  }
+
+  getAppInfo() {
+    return Promise.all([this.getUserInfo(), this.getInitialCards()]);
   }
 
   editUserInfo({ name, about }) {
@@ -47,6 +45,7 @@ class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+
   editAvatarInfo(avatar) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
@@ -59,7 +58,30 @@ class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+
+  addCard({ name, link }) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({ name, link }),
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+  deleteCard(id) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: "DELETE",
+      headers: this._headers,
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
 }
 
 export default Api;
-// export the class
