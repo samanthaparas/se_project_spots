@@ -67,20 +67,6 @@ const api = new Api({
   },
 });
 
-api
-  .getAppInfo()
-  .then(([userData, cards]) => {
-    profileNameEl.textContent = userData.name;
-    profileDescriptionEl.textContent = userData.about;
-    profileAvatarEl.src = userData.avatar;
-
-    cards.forEach((item) => {
-      const cardElement = getCardElement(item);
-      cardsList.append(cardElement);
-    });
-  })
-  .catch(console.error);
-
 // Edit profile elements
 const editProfileBtn = document.querySelector(".profile__edit-btn");
 const editProfileModal = document.querySelector("#edit-profile-modal");
@@ -148,6 +134,21 @@ const cardsList = document.querySelector(".cards__list");
 let selectedCard;
 let selectedCardId;
 
+api
+  .getAppInfo()
+  .then(([userData, cards]) => {
+    profileNameEl.textContent = userData.name;
+    profileDescriptionEl.textContent = userData.about;
+    profileAvatarEl.src = userData.avatar;
+
+    cards.forEach((item) => {
+      const cardElement = getCardElement(item);
+      cardsList.append(cardElement);
+    });
+  })
+  .catch(console.error);
+
+// Delete handlers
 function handleDeleteCard(cardElement, cardData) {
   selectedCard = cardElement;
   selectedCardId = cardData._id;
@@ -168,25 +169,50 @@ function handleDeleteSubmit(evt) {
     .catch(console.error);
 }
 
+// Like handler
+function handleLike(evt, cardData) {
+  const likeBtn = evt.target;
+  const isCurrentlyLiked = cardData.isLiked;
+
+  api
+    .changeLikeStatus(cardData._id, isCurrentlyLiked)
+    .then((updatedCard) => {
+      if (updatedCard.isLiked) {
+        likeBtn.classList.add("card__like-btn_active");
+      } else {
+        likeBtn.classList.remove("card__like-btn_active");
+      }
+      cardData.isLiked = updatedCard.isLiked;
+      cardData.likes = updatedCard.likes;
+    })
+    .catch(console.error);
+}
+
 function getCardElement(data) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardTitleEl = cardElement.querySelector(".card__title");
   const cardImageEl = cardElement.querySelector(".card__image");
+  const cardLikeBtnEl = cardElement.querySelector(".card__like-btn");
+  const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
 
   cardImageEl.src = data.link;
   cardImageEl.alt = data.name;
   cardTitleEl.textContent = data.name;
 
-  const cardLikeBtnEl = cardElement.querySelector(".card__like-btn");
-  cardLikeBtnEl.addEventListener("click", () => {
-    cardLikeBtnEl.classList.toggle("card__like-btn_active");
+  if (data.isLiked) {
+    cardLikeBtnEl.classList.add("card__like-btn_active");
+  }
+  // Like click
+  cardLikeBtnEl.addEventListener("click", (evt) => {
+    handleLike(evt, data);
   });
 
-  const cardDeleteBtnEl = cardElement.querySelector(".card__delete-btn");
+  // Delete click
   cardDeleteBtnEl.addEventListener("click", () => {
     handleDeleteCard(cardElement, data);
   });
 
+  // Preview click
   cardImageEl.addEventListener("click", () => {
     previewImageEl.src = data.link;
     previewImageEl.alt = data.name;
@@ -199,6 +225,7 @@ function getCardElement(data) {
 
 function openModal(modal) {
   modal.classList.add("modal_is-opened");
+
   function evtEscClose(evt) {
     if (evt.key === "Escape") {
       closeModal(modal);
@@ -224,12 +251,12 @@ function closeModal(modal) {
   modal.removeEventListener("mousedown", modal._evtOverlayClose);
 }
 
+// Forms
 editProfileBtn.addEventListener("click", function () {
   editProfileNameInput.value = profileNameEl.textContent;
   editProfileDescriptionInput.value = profileDescriptionEl.textContent;
 
   resetValidation(editProfileForm, settings);
-
   openModal(editProfileModal);
 });
 
@@ -249,8 +276,6 @@ avatarModalBtn.addEventListener("click", function () {
   resetValidation(avatarForm, settings);
   openModal(avatarModal);
 });
-
-avatarForm.addEventListener("submit", handleAvatarSubmit);
 
 deleteForm.addEventListener("submit", handleDeleteSubmit);
 
@@ -293,7 +318,6 @@ function handleNewPostSubmit(evt) {
     });
 }
 
-// to-do: finish avatar submission handler
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
 
@@ -314,6 +338,7 @@ function handleAvatarSubmit(evt) {
     });
 }
 
+avatarForm.addEventListener("submit", handleAvatarSubmit);
 newPostForm.addEventListener("submit", handleNewPostSubmit);
 
 enableValidation(settings);
