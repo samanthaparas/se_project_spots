@@ -68,6 +68,7 @@
       <footer class="footer page__section">
         <p class="footer__copyright">2025 &copy; Spots by Samantha Paras</p>
       </footer>
+
       <div class="modal" id="new-post-modal">
         <div class="modal__container">
           <button
@@ -105,12 +106,15 @@
               aria-label="Submit modal"
               type="submit"
               class="modal__submit-btn"
+              data-default-text="Save"
+              data-loading-text="Saving..."
             >
               Save
             </button>
           </form>
         </div>
       </div>
+
       <div class="modal" id="edit-profile-modal">
         <div class="modal__container">
           <button
@@ -153,6 +157,8 @@
               aria-label="Submit modal"
               type="submit"
               class="modal__submit-btn"
+              data-default-text="Save"
+              data-loading-text="Saving..."
             >
               Save
             </button>
@@ -199,6 +205,8 @@
             aria-label="Submit modal"
             type="submit"
             class="modal__submit-btn"
+            data-default-text="Save"
+            data-loading-text="Saving..."
           >
             Save
           </button>
@@ -206,8 +214,6 @@
       </div>
     </div>
 
-    <!-- to-do - style the modal -->
-    <!-- modal_is-opened to view delete modal -->
     <div class="modal" id="delete-modal">
       <div class="modal__container">
         <button
@@ -227,6 +233,8 @@
             aria-label="Submit modal"
             type="submit"
             class="modal__submit-btn"
+            data-default-text="Delete"
+            data-loading-text="Deleting..."
           >
             Delete
           </button>

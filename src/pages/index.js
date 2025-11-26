@@ -5,6 +5,7 @@ import {
   resetValidation,
   disableButton,
 } from "../scripts/validation.js";
+import { setBtnText } from "../utils/helpers.js";
 
 import logo from "../images/logo.svg";
 import avatar from "../images/avatar.jpg";
@@ -158,6 +159,9 @@ function handleDeleteCard(cardElement, cardData) {
 function handleDeleteSubmit(evt) {
   evt.preventDefault();
 
+  const submitBtn = evt.submitter;
+  setBtnText(submitBtn, true);
+
   api
     .deleteCard(selectedCardId)
     .then(() => {
@@ -166,7 +170,10 @@ function handleDeleteSubmit(evt) {
       selectedCardId = null;
       closeModal(deleteModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setBtnText(submitBtn, false);
+    });
 }
 
 // Like handler
@@ -279,8 +286,13 @@ avatarModalBtn.addEventListener("click", function () {
 
 deleteForm.addEventListener("submit", handleDeleteSubmit);
 
+// Edit Profile
 function handleEditProfileSubmit(evt) {
   evt.preventDefault();
+
+  const submitBtn = evt.submitter;
+  setBtnText(submitBtn, true);
+
   api
     .editUserInfo({
       name: editProfileNameInput.value,
@@ -291,13 +303,19 @@ function handleEditProfileSubmit(evt) {
       profileDescriptionEl.textContent = data.about;
       closeModal(editProfileModal);
     })
-    .catch(console.error);
+    .catch(console.error)
+    .finally(() => {
+      setBtnText(submitBtn, false);
+    });
 }
-
 editProfileForm.addEventListener("submit", handleEditProfileSubmit);
 
+// New Post
 function handleNewPostSubmit(evt) {
   evt.preventDefault();
+
+  const submitBtn = evt.submitter;
+  setBtnText(submitBtn, true);
 
   const newCardData = {
     name: newPostCaptionInput.value,
@@ -313,13 +331,18 @@ function handleNewPostSubmit(evt) {
       disableButton(newPostFormBtn, settings);
       closeModal(newPostModal);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(console.error)
+    .finally(() => {
+      setBtnText(submitBtn, false);
     });
 }
 
+// Edit Avatar
 function handleAvatarSubmit(evt) {
   evt.preventDefault();
+
+  const submitBtn = evt.submitter;
+  setBtnText(submitBtn, true);
 
   const avatarLink = avatarInput.value;
 
@@ -333,8 +356,9 @@ function handleAvatarSubmit(evt) {
 
       closeModal(avatarModal);
     })
-    .catch((err) => {
-      console.error(err);
+    .catch(console.error)
+    .finally(() => {
+      setBtnText(submitBtn, false);
     });
 }
 
