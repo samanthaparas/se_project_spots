@@ -50,4 +50,4 @@ This webpage is deployed to GitHub Pages:
 
 ## Project Pitch Video
 
-[Watch my project pitch](YOUR_VIDEO_LINK_HERE)
+[Watch my project pitch](https://www.loom.com/share/83aec69bcdbe46c592b7b92c1d494249)
