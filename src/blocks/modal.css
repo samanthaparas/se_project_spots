@@ -94,11 +94,6 @@
   text-align: center;
 }
 
-/* #delete-modal .modal__title {
-  text-align: center;
-  font-size: 24px;
-} */
-
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -294,8 +289,8 @@
   }
 
   #delete-modal .modal__close-btn {
-    top: 0;
-    right: -32px;
+    top: -40px;
+    right: 0;
   }
 
   .modal__close-btn_type_preview {

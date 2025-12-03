@@ -14,3 +14,23 @@ export function setBtnText(
     btn.disabled = false;
   }
 }
+
+export function handleSubmit(request, evt) {
+  evt.preventDefault();
+
+  const submitBtn = evt.submitter;
+
+  // show loading state using your existing helper
+  setBtnText(submitBtn, true);
+
+  request()
+    .then(() => {
+      // reset the form on success
+      evt.target.reset();
+    })
+    .catch(console.error)
+    .finally(() => {
+      // restore button text / state
+      setBtnText(submitBtn, false);
+    });
+}

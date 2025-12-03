@@ -15,20 +15,24 @@
   <body>
     <div class="page">
       <header class="header">
-        <img src="./images/logo.svg" alt="Spot Logo" class="header__logo" />
+        <img
+          src="<%=require('./images/logo.svg')%>"
+          alt="Spot Logo"
+          class="header__logo"
+        />
       </header>
       <main class="content">
         <section class="profile page__section">
           <div class="profile__avatar-container">
             <button class="profile__avatar-btn">
               <img
-                src="./images/pencil-light.svg"
+                src="<%=require('./images/pencil-light.svg')%>"
                 alt="Edit Avatar"
                 class="profile__pencil-icon"
               />
             </button>
             <img
-              src="./images/avatar.jpg"
+              src="<%=require('./images/avatar.jpg')%>"
               alt="Bessie Coleman"
               class="profile__avatar"
             />
@@ -37,14 +41,17 @@
             <h1 class="profile__name">Bessie Coleman</h1>
             <p class="profile__description">Civil Aviator</p>
             <button type="button" class="profile__edit-btn">
-              <img src="./images/pencil.svg" alt="Edit profile" />
+              <img
+                src="<%=require('./images/pencil.svg')%>"
+                alt="Edit profile"
+              />
               Edit Profile
             </button>
           </div>
           <button type="button" class="profile__add-btn">
             <img
               class="profile__add-btn-img"
-              src="./images/plus.svg"
+              src="<%=require('./images/plus.svg')%>"
               alt="New post"
             />
             New Post
