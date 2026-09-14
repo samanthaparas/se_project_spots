@@ -1,33 +1,35 @@
-# Spots Stage 9
+# Spots
 
-### Overview
+A responsive photo-sharing feed built with vanilla JavaScript and a live REST API. Users can edit their profile and avatar, post new photos, like/unlike posts, and delete their own posts — all persisted server-side.
 
-- Intro
-- Figma
-- Deployment
-- hello
+**Live demo:** https://samanthaparas.github.io/se_project_spots/
 
-## Intro
+## About
 
-This project was originally created to ensure all elements of the Spots interface displayed correctly across popular screen sizes and included full modal functionality for user interactions. In Spots Stage 9, the project has been upgraded to connect with a live REST API so that all user actions persist on the server.
+Spots started as a static layout exercise and was later upgraded to integrate
+with a real backend, so all profile edits, new posts, likes, and deletes
+persist via API calls instead of living only in local state.
 
-The goal of this project is to apply all previously learned front-end concepts and integrate real asynchronous operations with the API.
+**Core features**
 
-### Key skills demonstrated include:
+- Fetches and renders profile + card data from a REST API on load
+- Edit profile name/description and avatar (PATCH requests, optimistic UI + loading states)
+- Add a new post and delete an existing one (POST/DELETE, with a confirmation modal before delete)
+- Like/unlike posts with live count sync from the server
+- Client-side form validation via the HTML5 Validity API, with inline error messages
+- Fully responsive layout (BEM CSS methodology)
 
-- Creating and organizing project blocks
-- Structuring code across HTML, CSS, and modular JavaScript
-- Building a fully responsive layout and attaching images/text dynamically
-- Opening and closing popups with smooth, accessible interactions
-- Allowing users to edit their profile info and avatar with server updates
-- Adding new cards and displaying them instantly from API responses
-- Deleting cards with a confirmation modal and removing them from both the DOM and server
-- Viewing full-size images through interactive modals
-- Liking and unliking cards with live updates from the API
-- Implementing loading states (“Saving…”, “Deleting…”) for improved UX
-- Using an Api class to manage all requests and handle errors gracefully
+## Keyboard support
 
-### Technologies & Techniques
+- **Tab / Shift+Tab** — moves focus through all interactive elements (buttons, links, form fields) in document order; native browser focus outlines are preserved.
+- **Enter** — submits the focused form / activates the focused button.
+- **Escape** — closes whichever modal is currently open.
+
+Known limitation: focus isn't currently trapped inside open modals, and the
+like/delete icon buttons on each card don't yet have accessible labels for
+screen readers. Both are on the list for future cleanup.
+
+## Technologies & Techniques
 
 - HTML5, semantic structure
 - CSS3, BEM methodology, responsive layout
@@ -41,12 +43,6 @@ The goal of this project is to apply all previously learned front-end concepts a
 ## Figma
 
 [Link to Figma example that was used](https://www.figma.com/design/mXGZ6wZ4QPKx5KjpHX9QCV/Sprint-9-Project--Spots?node-id=0-1&p=f&t=3HRuIEPQ7FuVYxzc-0)
-
-## Deployment
-
-This webpage is deployed to GitHub Pages:
-
-[Samantha's Spots Project](https://samanthaparas.github.io/se_project_spots/)
 
 ## Project Pitch Video
 
